@@ -8,7 +8,7 @@ from copy import deepcopy
 
 class MultiSet(object):
 
-    def __init__(self, elems=[]):
+    def __init__(self, elems = []):
         """
         choose a representation
         """
@@ -85,7 +85,13 @@ class MultiSet(object):
             if element e has multiplicity > 1
 
         """
-        pass
+        rep = self.elemento.count(e)
+        
+        if rep >= 1:
+           return True
+        else:
+            return False
+        
 
     def union(self, ms):
         '''
@@ -102,7 +108,14 @@ class MultiSet(object):
         new_ms : Multiset
             the union between the object and ms
         '''
-        pass
+        
+        self.elemento.extend(ms.elemento)
+
+        new_ms = MultiSet(self.elemento)
+        print(f"The union between the two multisets is: {new_ms.elemento}")
+        
+        return new_ms.elemento
+        
 
     def intersection(self, ms):
         """
@@ -141,12 +154,13 @@ class MultiSet(object):
 
 if __name__ == "__main__":
     ms1 = MultiSet([1, 1, 2, 4])        # ms1 = { 1, 1, 2,          4       }
+    
     ms1.add(3)                          # ms1 = { 1, 1, 2,    3,    4       }
     ms1.add(3)                          # ms1 = { 1, 1, 2,    3, 3, 4       }
     ms1.add(2)                          # ms1 = { 1, 1, 2, 2, 3, 3, 4       }
-    ms1.remove(1)                       # ms1 = { 1,    2, 2, 3, 3, 4       }
-    #ms2 = ms1.union(MultiSet([4,5]))    # ms2 = { 1,    2, 2, 3, 3, 4, 4, 5 }
-    #ms2.remove(2)                       # ms2 = { 1,    2,    3, 3, 4, 4, 5 }
+    ms1.remove(1)                       # ms1 = { 1,    2, 2, 3, 3, 4       }   
+    ms2 = ms1.union(MultiSet([7,5]))    # ms2 = { 1,    2, 2, 3, 3, 4, 4, 5 }
+    ms2.remove(2)                       # ms2 = { 1,    2,    3, 3, 4, 4, 5 }
     #ms3 = ms1.intersection(ms2)         # ms3 = { 1,    2,    3, 3, 4       }
     #ms1 = ms1.difference(ms3)                 # ms1 = {       2                   }
     #print(ms1.membership_test(2))       # True
