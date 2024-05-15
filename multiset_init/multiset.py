@@ -113,7 +113,7 @@ class MultiSet(object):
 
         new_ms = MultiSet(ms.elemento)
 
-        print(f"The union between the two multisets is: {new_ms.elemento}")
+        print(f"The union between the two multisets (m2) is: {new_ms.elemento}")
         
         return new_ms
         
@@ -146,7 +146,7 @@ class MultiSet(object):
                 
         new_ms = MultiSet(intersection)
 
-        print('The intersection is:', new_ms.elemento)
+        print('The intersection (m3) is:', new_ms.elemento)
         return new_ms
 
 
@@ -166,7 +166,15 @@ class MultiSet(object):
         new_ms : Multiset
             the difference between the object and ms
         """
-        pass
+
+        difference = self.elemento
+        for j in ms.elemento:
+            difference.remove(j)
+        
+        new_ms = MultiSet(difference)
+
+        print('The difference  is:', new_ms.elemento)
+        return new_ms 
 
 
 if __name__ == "__main__":
@@ -179,8 +187,8 @@ if __name__ == "__main__":
     ms2 = ms1.union(MultiSet([4,5]))    # ms2 = { 1,    2, 2, 3, 3, 4, 4, 5 }
     ms2.remove(2)                       # ms2 = { 1,    2,    3, 3, 4, 4, 5 
     ms3 = ms1.intersection(ms2)         # ms3 = { 1,    2,    3, 3, 4       }
-    #ms1 = ms1.difference(ms3)                 # ms1 = {       2                   }
-    #print(ms1.membership_test(2))       # True
-    #print(ms1.membership_test(5))       # False
+    ms1 = ms1.difference(ms3)                 # ms1 = {       2                   }
+    print(ms1.membership_test(2))       # True
+    print(ms1.membership_test(5))       # False
     
     print('Fine')
