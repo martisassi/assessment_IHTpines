@@ -109,12 +109,13 @@ class MultiSet(object):
             the union between the object and ms
         '''
         
-        self.elemento.extend(ms.elemento)
+        ms.elemento.extend(self.elemento)
 
-        new_ms = MultiSet(self.elemento)
+        new_ms = MultiSet(ms.elemento)
+
         print(f"The union between the two multisets is: {new_ms.elemento}")
         
-        return new_ms.elemento
+        return new_ms
         
 
     def intersection(self, ms):
@@ -132,7 +133,23 @@ class MultiSet(object):
         new_ms : Multiset
             the intersection between the object and ms
         """
-        pass
+        print(self.elemento)
+
+        intersection = []
+        for i in self.elemento:
+            for j in ms.elemento: 
+                if i == j:
+                    intersection.append(i)
+                    ms.elemento.remove(j)
+                else:
+                    continue
+                
+        new_ms = MultiSet(intersection)
+
+        print('The intersection is:', new_ms.elemento)
+        return new_ms
+
+
 
     def difference(self,ms):
         """
@@ -159,9 +176,9 @@ if __name__ == "__main__":
     ms1.add(3)                          # ms1 = { 1, 1, 2,    3, 3, 4       }
     ms1.add(2)                          # ms1 = { 1, 1, 2, 2, 3, 3, 4       }
     ms1.remove(1)                       # ms1 = { 1,    2, 2, 3, 3, 4       }   
-    ms2 = ms1.union(MultiSet([7,5]))    # ms2 = { 1,    2, 2, 3, 3, 4, 4, 5 }
-    ms2.remove(2)                       # ms2 = { 1,    2,    3, 3, 4, 4, 5 }
-    #ms3 = ms1.intersection(ms2)         # ms3 = { 1,    2,    3, 3, 4       }
+    ms2 = ms1.union(MultiSet([4,5]))    # ms2 = { 1,    2, 2, 3, 3, 4, 4, 5 }
+    ms2.remove(2)                       # ms2 = { 1,    2,    3, 3, 4, 4, 5 
+    ms3 = ms1.intersection(ms2)         # ms3 = { 1,    2,    3, 3, 4       }
     #ms1 = ms1.difference(ms3)                 # ms1 = {       2                   }
     #print(ms1.membership_test(2))       # True
     #print(ms1.membership_test(5))       # False
