@@ -12,7 +12,7 @@ class MultiSet(object):
         """
         choose a representation
         """
-        self.elemento = sorted(elems)
+        self.elemento = sorted(elems)           #the constructor sorts the elements of a list
         #print(self.elemento)
 
 
@@ -42,8 +42,6 @@ class MultiSet(object):
                 self.elemento.append(elem)
                 self.elemento = sorted(self.elemento)
        
-            
-
         print(self.elemento)
 
     def remove(self, e):
@@ -68,7 +66,6 @@ class MultiSet(object):
 
         print(self.elemento)
 
-      
 
     def membership_test(self, e):
         """
@@ -148,7 +145,6 @@ class MultiSet(object):
 
         print('The intersection (m3) is:', new_ms.elemento)
         return new_ms
-
 
 
     def difference(self,ms):
