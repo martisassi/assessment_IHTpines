@@ -13,7 +13,6 @@ class MultiSet(object):
         choose a representation
         """
         self.elemento = sorted(elems)           #the constructor sorts the elements of a list
-        #print(self.elemento)
 
 
     def add(self, e):
@@ -31,18 +30,17 @@ class MultiSet(object):
 
         """
 
-        if type(e) == int or type(e) == float:
-            print ('quello che ho inserito è un num')
+        if type(e) == int or type(e) == float:   #if the element to be add is an int or float, append and sort the element
             self.elemento.append(e)
             self.elemento = sorted(self.elemento, key = int)
         
-        elif type(e) == tuple:
-            print("TUPLA")
+        elif type(e) == tuple:                   #if the element to be add is a tuple, each individual element in the tuple is appended with a for loop and sorted
             for elem in e:
                 self.elemento.append(elem)
                 self.elemento = sorted(self.elemento)
-       
-        print(self.elemento)
+        
+        print (f'New Multiset after adding the element {e} is: {self.elemento}')
+
 
     def remove(self, e):
     
@@ -59,12 +57,12 @@ class MultiSet(object):
         None.
         """
         
-        rep = self.elemento.count(e)
+        rep = self.elemento.count(e)   #rep is the number of times that the element 'e' is present in the object
                 
         if rep > 0:
-            self.elemento.remove(e)
+            self.elemento.remove(e)    #if the multiplicity of 'e' is > 0, the multiplicity is decreased 
 
-        print(self.elemento)
+        print (f'New Multiset after removing the element {e} is: {self.elemento}')
 
 
     def membership_test(self, e):
@@ -82,7 +80,7 @@ class MultiSet(object):
             if element e has multiplicity > 1
 
         """
-        rep = self.elemento.count(e)
+        rep = self.elemento.count(e) #rep is the number of times that the element 'e' is present in the object
         
         if rep >= 1:
            return True
@@ -106,11 +104,11 @@ class MultiSet(object):
             the union between the object and ms
         '''
         
-        ms.elemento.extend(self.elemento)
+        ms.elemento.extend(self.elemento)    #The elements of the object are added to the elements of New Multiset (ms)
 
-        new_ms = MultiSet(ms.elemento)
+        new_ms = MultiSet(ms.elemento)       #New Multiset is created 
 
-        print(f"The union between the two multisets (m2) is: {new_ms.elemento}")
+        print(f"The union between the two Multisets is ms2: {new_ms.elemento}")
         
         return new_ms
         
@@ -130,12 +128,11 @@ class MultiSet(object):
         new_ms : Multiset
             the intersection between the object and ms
         """
-        print(self.elemento)
 
-        intersection = []
-        for i in self.elemento:
+        intersection = []                   #Create an empty list.    
+        for i in self.elemento:             #Each element of the object is compared with the elements of the new ms multiset
             for j in ms.elemento: 
-                if i == j:
+                if i == j:                  #if there is a match, that element is inserted into the empty list and removed from the ms multiset.
                     intersection.append(i)
                     ms.elemento.remove(j)
                 else:
@@ -143,7 +140,7 @@ class MultiSet(object):
                 
         new_ms = MultiSet(intersection)
 
-        print('The intersection (m3) is:', new_ms.elemento)
+        print('The intersection between two Multisets is ms3:', new_ms.elemento)
         return new_ms
 
 
@@ -163,19 +160,21 @@ class MultiSet(object):
             the difference between the object and ms
         """
 
-        difference = self.elemento
-        for j in ms.elemento:
-            difference.remove(j)
+        diff = self.elemento       #Create a copy of the object
+        print(diff)
+        for j in ms.elemento:      #if each element of new multiset (j) is in diff, it is removed from diff
+            if j in diff:
+                diff.remove(j)
+            
         
-        new_ms = MultiSet(difference)
+        new_ms = MultiSet(diff)
 
-        print('The difference  is:', new_ms.elemento)
+        print(f'The difference between two Multisets is: {new_ms.elemento}')
         return new_ms 
 
 
 if __name__ == "__main__":
     ms1 = MultiSet([1, 1, 2, 4])        # ms1 = { 1, 1, 2,          4       }
-    
     ms1.add(3)                          # ms1 = { 1, 1, 2,    3,    4       }
     ms1.add(3)                          # ms1 = { 1, 1, 2,    3, 3, 4       }
     ms1.add(2)                          # ms1 = { 1, 1, 2, 2, 3, 3, 4       }
